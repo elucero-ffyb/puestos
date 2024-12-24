@@ -8,7 +8,7 @@ include('v_session.php');
 
 $perfilid=$_SESSION['user_role'];
 
-
+	
 $tipoRes = isset($_POST['select_tipo']) ? $_POST['select_tipo'] : '';
 $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
 $estado = isset($_POST['select_estado']) ? $_POST['select_estado'] : '';
@@ -18,24 +18,28 @@ switch ($estado) {
         $marca = '';
         $marca1 = '';
         $marca2 = '';
+        $estadox = 0;
         break;
     case '1':
         $marca1 = 'selected';
         $marca = '';
         $marca0 = '';
         $marca2 = '';
+        $estadox = 1;
         break;
     case '2':
         $marca2 = 'selected';
         $marca = '';
         $marca0 = '';
         $marca1 = '';
+        $estadox = 2;
         break;
     default:
         $marca = 'selected';
         $marca0 = '';
         $marca1 = '';
         $marca2 = '';
+        $estadox = '';
         break;
 }
 include_once('head.php');
@@ -129,12 +133,17 @@ $Tipo_res = $stmt_tipo->fetchAll(PDO::FETCH_ASSOC);
                                             <td><?php echo $res['ResolucionExpediente']; ?></td>
                                             <td><?php echo $res['ResolucionExpedienteFecha']; ?></td>
                                             <td><?php echo $res['TipoResolucionDsc']; ?></td>
-                                            <td><?php echo $res['estado']; ?></td>
+                                            <td><?php echo $res['ESTADOS']; ?></td>
                                                 
                                         </tr>
                                     <?php } ?>
                                 </tbody>
                             </table>
+                            <div><?php
+                            for ($i = 1; $i <= $totalPages; $i++) {
+                                echo "<a href='?page=$i'>" . ($i == $page ? "<strong>$i</strong>" : $i) . "</a> ";
+                            }?>
+                            </div>
                         </div>
 
                     </div>
