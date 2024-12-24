@@ -88,6 +88,13 @@ header("Content-Type: text/html;charset=utf-8");
     #menu {
     overflow: visible !important;
     }
+    select.form-control:not([size]):not([multiple]) {
+        font-size: 12px;
+    }
+    input[type="text"] {
+        font-size: 12px;
+        /*width: 250px;*/
+    }
 </style>
 
 </head>

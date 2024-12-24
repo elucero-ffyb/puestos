@@ -107,7 +107,7 @@ $query = "
     $whereSQL
     ORDER BY c2.CatedraDescripcion;
 ";
-print_r("*****".$whereSQL."****");
+//print_r("*****".$whereSQL."****");
 // Preparar la consulta
 $stmt_resu = $pdo->prepare($query);
 

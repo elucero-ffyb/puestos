@@ -51,7 +51,7 @@ $stmt_situ = $pdo->prepare($sql_situ);
 $stmt_situ->execute();
 $situ = $stmt_situ->fetchAll(PDO::FETCH_ASSOC);
 
-// Obtener la situaciones
+// Obtener la estados
 $sql_esta = "SELECT EstadoId,EstadoDsc from estado order by 2;";
 $stmt_esta = $pdo->prepare($sql_esta);
 $stmt_esta->execute();
@@ -105,7 +105,7 @@ include_once('head.php');
                                                 } ?>
                                             </select>
                                         </div>
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;            
                                         <div class="form-group">
                                             <label>Cargo</label>
                                             <select  name="select_cargo" id="select_cargo" class="form-control">
@@ -119,6 +119,7 @@ include_once('head.php');
                                                 } ?>
                                             </select>
                                         </div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
                                         <div class="form-group">
                                             <label>Denominacion</label>
@@ -134,11 +135,12 @@ include_once('head.php');
                                                 ?>
                                             </select>
                                         </div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="form-group">
                                             <label>legajo</label>
                                             <input type="text" value="<?php echo $legajo; ?>"  name="legajo" id="legajo" class="form-control">
                                         </div>
-                                        
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="form-group">
                                             <label>Situacion</label>
                                             <select name="select_situ" id="select_situ" class="form-control">
@@ -152,8 +154,7 @@ include_once('head.php');
                                                 } ?>
                                             </select>
                                         </div>
-
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;            
                                         <div class="form-group">
                                             <label>Estado</label>
                                             <select name="select_esta" id="select_esta" class="form-control">
@@ -168,7 +169,7 @@ include_once('head.php');
                                                 
                                             </select>
                                         </div>
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;            
                                         <div class="form-group">
                                             <label for="Vigencia">vigencia</label>
                                             <select name="Vigencia" id="Vigencia" class="form-control">
@@ -179,11 +180,12 @@ include_once('head.php');
                                                 <option value="4">Vencida</option>
                                             </select>
                                         </div>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="form-group">
                                             <label>Nombre</label>
                                             <input type="text" value="<?php echo $nombre; ?>" id="nombre" name="nombre" class="form-control">
                                         </div>
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;        
                                         <div class="form-group">
                                             <label for="caracter">Caracter</label>
                                             <select name="caracter" id="caracter" class="form-control">
@@ -197,7 +199,7 @@ include_once('head.php');
                                                 }?>
                                             </select>
                                         </div>
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;            
                                         <div class="form-group">
                                             <label for="origen">Origen</label>
                                             <select name="origen" id="origen" class="form-control">
@@ -211,7 +213,7 @@ include_once('head.php');
                                                 }?>
                                             </select>
                                         </div>
-
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
                                         <div class="form-group">
                                             <label>Plantel</label>
                                             <input type="text" value="<?php echo $plantel; ?>" id="plantel" name="plantel" class="form-control">
@@ -247,7 +249,7 @@ include_once('head.php');
                                         <th>Desde</th>
                                         <th>Hasta</th>
                                         <th>Vigencia</th>
-                                        <th>Plantel</th>
+                                        <th>Partida</th>
                                     </tr>
                                 </thead>
                                 <tbody id="resultados_certificados">
