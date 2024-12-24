@@ -6,6 +6,9 @@ $DB_PASSWORD = 'new50off1060';
 
 $DNS="sqlsrv:Server=tcp:{$DB_HOST},1433;Database={$DB_DATABASE}";
 
+
+
+
 try {
     $pdo = new PDO($DNS, $DB_USERNAME, $DB_PASSWORD);
     // Establece el modo de error PDO a excepción
