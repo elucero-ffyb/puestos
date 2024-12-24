@@ -11,7 +11,7 @@ $perfilid=$_SESSION['user_role'];
 	
 $tipoRes = isset($_POST['select_tipo']) ? $_POST['select_tipo'] : '';
 $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : '';
-$estado = isset($_POST['select_estado']) ? $_POST['select_estado'] : '';
+$estado = isset($_POST['select_estado']) ? $_POST['select_estado'] : 0;
 switch ($estado) {
     case '0':
         $marca0 = 'selected';
@@ -103,19 +103,21 @@ $Tipo_res = $stmt_tipo->fetchAll(PDO::FETCH_ASSOC);
                         <div id="mensajes"></div>
                         
                         <div class="table-responsive">
-                            <table class="table mt-3 table-striped">
+                            <table class="table mt-3 table-striped" id="tablaCertificados">
                                 <thead>
+                                        
                                     <tr>
-                                        <th>id</th>
-                                        <th>Año</th>
-                                        <th>Origen</th>
-                                        <th>Nº.</th>
-                                        <th>Fecha</th>
-                                        <th>Descripción</th>
-                                        <th>Expediente</th>
-                                        <th>Fecha Exp.</th>
-                                        <th>tipo Res</th>
-                                        <th>Estado</th>
+                                        <th  onclick="ordenarTabla(0)">id</th>
+                                        <th  onclick="ordenarTabla(1)">Año</th>
+                                        <th  onclick="ordenarTabla(2)">Origen</th>
+                                        <th  onclick="ordenarTabla(3)">Nº.</th>
+                                        <th  onclick="ordenarTabla(4)">Fecha</th>
+                                        <th  onclick="ordenarTabla(5)">Descripción</th>
+                                        <th  onclick="ordenarTabla(6)">Expediente</th>
+                                        <th  onclick="ordenarTabla(7)">Fecha Exp.</th>
+                                        <th  onclick="ordenarTabla(8)">tipo Res</th>
+                                        <th  onclick="ordenarTabla(9)">Estado</th>
+                                        <th><i class="far fa-file-excel" id="exportarExcel" title="exportar a excel"></th>
                                     </tr>
                                 </thead>
                                 <tbody id="resultados_certificados">
@@ -133,7 +135,7 @@ $Tipo_res = $stmt_tipo->fetchAll(PDO::FETCH_ASSOC);
                                             <td><?php echo $res['ResolucionExpediente']; ?></td>
                                             <td><?php echo $res['ResolucionExpedienteFecha']; ?></td>
                                             <td><?php echo $res['TipoResolucionDsc']; ?></td>
-                                            <td><?php echo $res['ESTADOS']; ?></td>
+                                            <td colspan=2><?php echo $res['ESTADOS']; ?></td>
                                                 
                                         </tr>
                                     <?php } ?>
@@ -151,3 +153,60 @@ $Tipo_res = $stmt_tipo->fetchAll(PDO::FETCH_ASSOC);
             </section>
         </section>
     </section>
+
+<script>
+    document.getElementById('exportarExcel').addEventListener('click', function() {
+    // Obtener la tabla
+    var table = document.querySelector('table');
+    
+    // Convertir la tabla a una hoja de trabajo de Excel
+    var wb = XLSX.utils.table_to_book(table, {sheet: "Datos"});
+
+    // Exportar el archivo Excel
+    XLSX.writeFile(wb, 'salida_datos_resoluciones.xlsx');
+});
+
+</script>   
+<script>
+        // Función para ordenar la tabla
+        let ordenAscendente = true; // Estado de orden, ascendente o descendente
+
+        function ordenarTabla(columnaIndex) {
+            let tabla = document.getElementById("tablaCertificados");
+            let filas = Array.from(tabla.getElementsByTagName("tr")).slice(1); // Obtener todas las filas, excepto el encabezado
+
+            // Ordenar las filas
+            filas.sort((a, b) => {
+                let celdaA = a.cells[columnaIndex].innerText.trim();
+                let celdaB = b.cells[columnaIndex].innerText.trim();
+
+                // Si la columna es de tipo fecha (aa/mm/aaaa)
+                if (celdaA.match(/\d{2}\/\d{2}\/\d{4}/) && celdaB.match(/\d{2}\/\d{2}\/\d{4}/)) {
+                    // Convertir las fechas de formato aa/mm/aaaa a un formato comparable
+                    let fechaA = celdaA.split('/').reverse().join('-'); // Cambia a yyyy-mm-dd
+                    let fechaB = celdaB.split('/').reverse().join('-'); // Cambia a yyyy-mm-dd
+                    celdaA = new Date(fechaA);
+                    celdaB = new Date(fechaB);
+                } else if (!isNaN(celdaA) && !isNaN(celdaB)) { // Si la columna es un número
+                    celdaA = parseFloat(celdaA);
+                    celdaB = parseFloat(celdaB);
+                }
+
+                // Ordenar dependiendo del estado de ordenAscendente
+                if (ordenAscendente) {
+                    return celdaA > celdaB ? 1 : (celdaA < celdaB ? -1 : 0);
+                } else {
+                    return celdaA < celdaB ? 1 : (celdaA > celdaB ? -1 : 0);
+                }
+            });
+
+            // Volver a agregar las filas ordenadas a la tabla
+            filas.forEach(fila => tabla.appendChild(fila));
+
+            // Alternar el orden
+            ordenAscendente = !ordenAscendente;
+        }
+
+        
+    </script>
+</body>

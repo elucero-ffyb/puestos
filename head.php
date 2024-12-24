@@ -13,12 +13,13 @@ header("Content-Type: text/html;charset=utf-8");
     <link href="css/bootstrap-theme-min.css" rel="stylesheet">
     <link href="css/estilosxx.css" rel="stylesheet">
     <link href="css/estilosH.css" rel="stylesheet">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
     <script type="text/javascript" src="js/jquery.3.4.1.min.js"></script>
     <script type="text/javascript" src="js/tether.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/popper.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
 
     <title>Acceso puestos de trabajo</title>
     <style>
@@ -95,6 +96,9 @@ header("Content-Type: text/html;charset=utf-8");
         font-size: 12px;
         /*width: 250px;*/
     }
+    th {
+            cursor: pointer;
+        }
 </style>
 
 </head>
